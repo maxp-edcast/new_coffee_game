@@ -10,9 +10,21 @@ sections =
 
 $ ->
 
+  $body = $ "body"
+  $head = $ "head"
+
+  $head.append $("<script>",
+    type: "text/javacript",
+    src: "./vendor/RPGUI/dist/rpgui.js"
+  )
+  $head.append $("<link>",
+    type: "text/css",
+    rel: "stylesheet",
+    href: "./vendor/RPGUI/dist/rpgui.css"
+  )
+
   DOM = require("./lib/dom.coffee").load({sections})
 
-  $body = $ "body"
 
   $body.append sections.$grid
 
