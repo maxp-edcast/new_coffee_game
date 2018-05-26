@@ -1,16 +1,12 @@
 
 window.$ = require 'jquery'
 
-React = require 'react'
-ReactDOM = require 'react-dom'
+require './style.sass'
 
-class Root extends React.Component
-  render: -> (
-    <b>hello world </b>
-  )
-
-window.InitReact = ->
-  ReactDOM.render <Root/>, document.getElementById("root-wrapper")
+sections =
+  $grid: $ require "html-loader!./views/grid.slim"
 
 $ ->
-  InitReact()
+  $body = $ "body"
+  # debugger
+  $body.append sections.$grid
