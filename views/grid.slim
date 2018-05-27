@@ -6,11 +6,12 @@
   - Config.num_rows.times.map do |row_idx|
     div.row {
       data-row-idx=row_idx
-    } 
+    }
       - Config.num_cols.times.map do |col_idx|
         div.col {
           data-row-idx=row_idx
           data-col-idx=col_idx
         }
           .content
+          .decoration-box
 

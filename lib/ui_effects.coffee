@@ -17,7 +17,6 @@ module.exports = (->
       @GameFlow.choose_character()
 
   @configure_grid = () =>
-    @add_col_listeners()
     @add_game_state()
 
   @configure_char_select = () =>
@@ -61,19 +60,12 @@ module.exports = (->
 
   @add_char_opt_listeners = () =>
     {$char_opts} = @DOM
-    $char_opts.each @add_hover_listeners
     $char_opts.each @add_char_opt_click_listeners
 
 
   @add_level_opt_listeners = () =>
     {$level_opts} = @DOM
-    $level_opts.each @add_hover_listeners
     $level_opts.each @add_level_opt_click_listeners
-
-
-  @add_col_listeners = () =>
-    {$cols} = @DOM
-    $cols.each @add_hover_listeners
 
   @add_level_opt_click_listeners = (idx, el) =>
     $el = $ el
@@ -90,13 +82,6 @@ module.exports = (->
       $char_name = $char_opt.find(".char-name")
       @GameFlow.set_character($char_name.text())
       @GameFlow.choose_level()
-
-  @add_hover_listeners = (idx, el) =>
-    $el = $ el
-    $el.on "mouseenter", (e) =>
-      $(e.currentTarget).addClass "hovered"
-    $el.on "mouseleave", (e) =>
-      $(e.currentTarget).removeClass "hovered"
 
   @add_masonry = () =>
     # NEED TO DEBUG THIS
