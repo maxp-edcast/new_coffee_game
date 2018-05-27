@@ -9,6 +9,7 @@ module.exports = load: () -> (->
   @$grid = $ require "html-loader!../views/grid.slim"
   @$rows = @$grid.find(".row")
   @$cols = @$grid.find(".col")
+  @$char_name = @$grid.find(".char-name")
 
   @$char_select = $ require "html-loader!../views/char_select.slim"
   @$char_opts = @$char_select.find(".char-opt")

@@ -1,14 +1,10 @@
 module.exports = (->
 
-  @begin = ({DOM, Masonry, GameFlow}) =>
-
+  @begin = ({DOM, Masonry, GameFlow, State}) =>
     @DOM = DOM
     @Masonry = Masonry
     @GameFlow = GameFlow
-
-    # @configure_welcome()
-    # @configure_char_select()
-    # @configure_grid()
+    @State = State
 
 # =========================================
 
@@ -17,13 +13,17 @@ module.exports = (->
       @GameFlow.choose_character()
 
   @configure_grid = () =>
-    @add_col_listeners(@DOM)
+    @add_col_listeners()
+    @add_game_state()
 
   @configure_char_select = () =>
-    # @add_masonry(Masonry, DOM)
-    @add_char_opt_listeners(@DOM)
+    # @add_masonry()
+    @add_char_opt_listeners()
 
 # =========================================
+
+  @add_game_state = =>
+    @DOM.$char_name.text(@State.char_name)
 
   @route_button = ($btn, fn) =>
     $btn.on 'click', fn
@@ -31,10 +31,19 @@ module.exports = (->
   @add_char_opt_listeners = () =>
     {$char_opts} = @DOM
     $char_opts.each @add_hover_listeners
+    $char_opts.each @add_char_opt_click_listeners
 
   @add_col_listeners = () =>
     {$cols} = @DOM
     $cols.each @add_hover_listeners
+
+  @add_char_opt_click_listeners = (idx, el) =>
+    $el = $ el
+    $el.on "click", (e) =>
+      $char_opt = $ e.currentTarget
+      $char_name = $char_opt.find(".char-name")
+      @GameFlow.set_character($char_name.text())
+      @GameFlow.start_game()
 
   @add_hover_listeners = (idx, el) =>
     $el = $ el
@@ -44,8 +53,8 @@ module.exports = (->
       $(e.currentTarget).removeClass "hovered"
 
   @add_masonry = () =>
-    {$char_select} = @DOM
     # NEED TO DEBUG THIS
+    {$char_select} = @DOM
     new Masonry $char_select[0],
       itemSelector: ".char-opt"
       columnWidth: 200

@@ -1,6 +1,9 @@
 module.exports = ->
 
-  @begin = ({DOM, ui_effects}) =>
+# =========================================
+
+  @begin = ({DOM, ui_effects, State}) =>
+    @State = State
     @ui_effects = ui_effects
     @DOM = DOM
     @welcome()
@@ -19,6 +22,11 @@ module.exports = ->
     @DOM.$body.empty()
     @DOM.$body.append @DOM.$grid
     @ui_effects.configure_grid()
+
+# =========================================
+
+  @set_character = (name) =>
+    @State.char_name = name
 
   this
 .apply {}

@@ -1,4 +1,6 @@
 
+# =========================================
+
 window.$ = require 'jquery'
 
 require './style.sass'
@@ -8,6 +10,10 @@ Masonry = require 'masonry-layout'
 ui_effects = require './lib/ui_effects.coffee'
 
 GameFlow = require './lib/game_flow.coffee'
+
+window.State = {}
+
+# =========================================
 
 $ ->
 
@@ -24,6 +30,10 @@ $ ->
     href: "./vendor/RPGUI/dist/rpgui.css"
   )
 
-  ui_effects.begin({DOM, Masonry, GameFlow})
+# =========================================
 
-  GameFlow.begin({DOM, ui_effects})
+  deps = {DOM, Masonry, GameFlow, State, ui_effects}
+
+  ui_effects.begin(deps)
+
+  GameFlow.begin(deps)
