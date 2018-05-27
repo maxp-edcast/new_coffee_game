@@ -6,7 +6,12 @@ module.exports = (->
     @GameFlow = GameFlow
     @State = State
 
+    @configure_global_listeners()
+
 # =========================================
+
+  @configure_global_listeners = =>
+    @add_restart_handler(@DOM.$restart_btn)
 
   @configure_welcome = () =>
     @route_button @DOM.$start_btn, =>
@@ -22,8 +27,14 @@ module.exports = (->
 
 # =========================================
 
+  @add_restart_handler = ($btn) =>
+    $btn.on "click", (e) =>
+      location.hash = ""
+      location.pathname = "/"
+      location.reload()
+
   @add_game_state = =>
-    @DOM.$char_name.text(@State.char_name)
+    @DOM.$char_name.text(@State.char_name || "ERROR! name not set")
 
   @route_button = ($btn, fn) =>
     $btn.on 'click', fn

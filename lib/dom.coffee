@@ -3,6 +3,10 @@ module.exports = load: () -> (->
   @$body = $ "body"
   @$head = $ "head"
 
+  @$game_container = @$body.find("#game-container")
+
+  @$restart_btn = $ "#restart"
+
   @$welcome = $ require "html-loader!../views/welcome.slim"
   @$start_btn = @$welcome.find("#start")
 
