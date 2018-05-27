@@ -1,8 +1,8 @@
 - require_relative "../config/config.rb"
-
+ 
 #char-select
   p.char-select-intro choose your character!
-  - Config.characters.to_h.each do |name, char|
+  - Config.characters.each do |name, char|
     .char-opt.rpgui-cursor-point
       .char-name = name
-      small.char-attrs == char.to_h.map { |k,v| "#{k} = #{v}" }.join("<br>")
+      small.char-attrs == char.description

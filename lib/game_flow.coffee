@@ -67,7 +67,6 @@ module.exports = ->
   @get_path = =>
     location.hash
 
-
   @set_character = (name) =>
     @State.char_name = name
     @sync_localstorage()

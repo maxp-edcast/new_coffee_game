@@ -60,7 +60,10 @@ Config = RecursiveOpenStruct.new
 
 Config.merge! to_struct load_yml "./config/game_config.yml"
 
-Config.characters = to_struct load_yml "./config/char_config.yml"
+Config.characters = Dir.glob("./content/characters/*.yml")
+  .map(&method(:load_yml))
+  .map(&method(:to_struct))
+  .reduce(&:merge)
 
 Config.levels = Dir.glob("./content/levels/*.yml")
   .map(&method(:load_yml))

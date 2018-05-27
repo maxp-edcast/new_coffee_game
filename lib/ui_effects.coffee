@@ -11,6 +11,7 @@ module.exports = (->
   @configure_main_menu_listeners = =>
     @add_main_menu_handler(@DOM.$main_menu_btn)
     @add_wipe_data_handler(@DOM.$wipe_data_btn)
+    @add_export_game_state_handler(@DOM.$export_game_state_btn)
 
   @configure_welcome = () =>
     @route_button @DOM.$start_btn, =>
@@ -35,9 +36,16 @@ module.exports = (->
   @add_wipe_data_handler = ($btn) =>
     $btn.on "click", @wipe_data
 
+  @add_export_game_state_handler = ($btn) =>
+    $btn.on "click", @export_game_state
+
   @wipe_data = =>
     @GameFlow.clear_localstorage()
     @main_menu()
+
+  @export_game_state = =>
+    @DOM.$body.empty()
+    @DOM.$body.append(JSON.stringify @State)
 
   @main_menu = =>
     @GameFlow.welcome()
