@@ -50,8 +50,9 @@ module.exports = (->
 
   @add_current_level_to_grid = =>
     level_data = @State.level_data
-    level_data.map.split("\n").forEach (row, row_idx) =>
-      chars = @grapheme_splitter.splitGraphemes(row)
+    char_matrix = level_data.map.split("\n").map (row) =>
+      @grapheme_splitter.splitGraphemes(row)
+    char_matrix.forEach (chars, row_idx) =>
       chars.forEach (icon, col_idx) =>
         @DOM.grid_content_matrix[row_idx][col_idx].text(icon)
 
