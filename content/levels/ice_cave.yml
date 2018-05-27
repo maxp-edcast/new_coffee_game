@@ -1,6 +1,10 @@
 ---
 
 ice_cave:
+
+  description: |
+    a frosty place with chill vibes
+
   map: |
     ❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎
     ❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎

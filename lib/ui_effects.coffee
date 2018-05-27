@@ -6,12 +6,13 @@ module.exports = (->
     @GameFlow = GameFlow
     @State = State
 
-    @configure_global_listeners()
+    @configure_main_menu_listeners()
 
 # =========================================
 
-  @configure_global_listeners = =>
-    @add_restart_handler(@DOM.$restart_btn)
+  @configure_main_menu_listeners = =>
+    @add_main_menu_handler(@DOM.$main_menu_btn)
+    @add_wipe_data_handler(@DOM.$wipe_data_btn)
 
   @configure_welcome = () =>
     @route_button @DOM.$start_btn, =>
@@ -31,20 +32,29 @@ module.exports = (->
 
 # =========================================
 
-  @add_restart_handler = ($btn) =>
-    $btn.on "click", @restart
+  @add_main_menu_handler = ($btn) =>
+    $btn.on "click", @main_menu
 
-  @restart = =>
+  @add_wipe_data_handler = ($btn) =>
+    $btn.on "click", @wipe_data
+
+  @wipe_data = =>
+    @GameFlow.clear_localstorage()
+    @main_menu()
+
+  @main_menu = =>
     @GameFlow.welcome()
 
   @add_game_state = =>
-    char_name = @State.char_name
-    level_name = @State.level_name
-    if char_name && level_name
-      @DOM.$char_name.text(char_name)
-      @DOM.$level_name.text(level_name)
-    else
-      setTimeout @restart, 0
+    @DOM.$char_name.text(@State.char_name)
+    @DOM.$level_name.text(@State.level_name)
+    @add_current_level_to_grid()
+
+  @add_current_level_to_grid = =>
+    level_data = @State.level_data
+    level_data.map.split("\n").forEach (row, row_idx) =>
+      row.split("").forEach (icon, col_idx) =>
+        @DOM.grid_matrix[row_idx].eq(col_idx).text(icon)
 
   @route_button = ($btn, fn) =>
     $btn.on 'click', fn

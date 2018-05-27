@@ -11,7 +11,5 @@ module.exports = (->
       Object.assign {}, memo, level_data
     , {}
 
-  console.log @levels
-
   this
 ).apply {}

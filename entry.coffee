@@ -34,7 +34,7 @@ $ ->
 
 # =========================================
 
-  deps = {DOM, Masonry, GameFlow, State, ui_effects}
+  deps = {DOM, Masonry, GameFlow, State, ui_effects, Config}
 
   ui_effects.begin(deps)
 

@@ -2,7 +2,7 @@
 
 #level-select
   p.level-select-intro choose your level!
-  - Config.levels.to_h.each do |name, level|
+  - Config.levels.each do |name, level|
     .level-opt.rpgui-cursor-point
       .level-name = name
-      small.level-attrs == level.to_h.map { |k,v| "#{k} = #{v}" }.join("<br>")
+      small.level-attrs == level.description
