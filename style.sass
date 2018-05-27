@@ -7,6 +7,9 @@ body, html
   height: 100%
   width: 100%
 
+#welcome
+  margin: 50px
+
 body
   border: 1px solid white
   padding: 5px
@@ -34,4 +37,31 @@ body
   box-shadow: none
   // box-shadow: 0 0 5px 0.25 green
 
+#char-select
+  padding: 25px
+
+.char-opt
+  border: 1px solid white
+  text-align: center
+  display: inline-block
+  padding: 10px
+  margin: 5px
+  border-radius: 10px
+  width: 150px
+  transition: background-color 0.5s linear
+
+.char-opt.hovered
+  background-color: darken(darkred, 10%)
+  transition: none
+  // box-shadow: none
+  transition: background-color 0.5s linear
+  // box-shadow: 0 0 5px 0.25 green
+
+.char-name
+  margin-bottom: 5px
+  text-shadow: -1px -1px 0 darkred, 1px -1px 0 darkred, 1px 1px 0 darkred, 1px 1px 0 darkred
+
+.char-attrs
+  text-align: right
+  display: inline-block
 // .hovered:hover

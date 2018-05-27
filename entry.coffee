@@ -3,29 +3,27 @@ window.$ = require 'jquery'
 
 require './style.sass'
 
+Masonry = require 'masonry-layout'
+
 ui_effects = require './lib/ui_effects.coffee'
 
-sections =
-  $grid: $ require "html-loader!./views/grid.slim"
+GameFlow = require './lib/game_flow.coffee'
 
 $ ->
 
-  $body = $ "body"
-  $head = $ "head"
+  DOM = require("./lib/dom.coffee").load()
+  window._DOM = DOM
 
-  $head.append $("<script>",
+  DOM.$head.append $("<script>",
     type: "text/javacript",
     src: "./vendor/RPGUI/dist/rpgui.js"
   )
-  $head.append $("<link>",
+  DOM.$head.append $("<link>",
     type: "text/css",
     rel: "stylesheet",
     href: "./vendor/RPGUI/dist/rpgui.css"
   )
 
-  DOM = require("./lib/dom.coffee").load({sections})
+  ui_effects.begin({DOM, Masonry, GameFlow})
 
-
-  $body.append sections.$grid
-
-  ui_effects.begin({DOM})
+  GameFlow.begin({DOM, ui_effects})

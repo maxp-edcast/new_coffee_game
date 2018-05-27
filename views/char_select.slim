@@ -1,0 +1,8 @@
+- require_relative "../config/config.rb"
+
+#char-select
+  p.char-select-intro choose your character!
+  - Config.characters.to_h.each do |name, char|
+    .char-opt
+      .char-name = name
+      small.char-attrs == char.to_h.map { |k,v| "#{k} = #{v}" }.join("<br>")
