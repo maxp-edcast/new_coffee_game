@@ -1,10 +1,8 @@
 module.exports = (->
 
-  @begin = ({DOM, Masonry, GameFlow, State}) =>
-    @DOM = DOM
-    @Masonry = Masonry
-    @GameFlow = GameFlow
-    @State = State
+  @begin = ({DOM, Masonry, GameFlow, State, grapheme_splitter}) =>
+    @deps = {DOM, Masonry, GameFlow, State, grapheme_splitter}
+    Object.assign this, @deps
 
     @configure_main_menu_listeners()
 
@@ -53,8 +51,8 @@ module.exports = (->
   @add_current_level_to_grid = =>
     level_data = @State.level_data
     level_data.map.split("\n").forEach (row, row_idx) =>
-      row.split("").forEach (icon, col_idx) =>
-        debugger if !@DOM.grid_content_matrix[row_idx][col_idx]
+      chars = @grapheme_splitter.splitGraphemes(row)
+      chars.forEach (icon, col_idx) =>
         @DOM.grid_content_matrix[row_idx][col_idx].text(icon)
 
   @route_button = ($btn, fn) =>

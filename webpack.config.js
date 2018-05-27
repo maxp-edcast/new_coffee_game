@@ -43,7 +43,6 @@ module.exports = {
       // Load YAML files
       {
         test: /\.yaml$/,
-        include: path.resolve('data'),
         loader: 'yaml'
       }
 

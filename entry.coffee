@@ -11,6 +11,9 @@ ui_effects = require './lib/ui_effects.coffee'
 
 GameFlow = require './lib/game_flow.coffee'
 
+GraphemeSplitter = require 'grapheme-splitter'
+grapheme_splitter = new GraphemeSplitter()
+
 window.State = {}
 
 window.Config = require './config/config.coffee'
@@ -34,7 +37,9 @@ $ ->
 
 # =========================================
 
-  deps = {DOM, Masonry, GameFlow, State, ui_effects, Config}
+  deps = {
+    DOM, Masonry, GameFlow, State, ui_effects, Config, grapheme_splitter
+  }
 
   ui_effects.begin(deps)
 
