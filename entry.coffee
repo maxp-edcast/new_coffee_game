@@ -13,6 +13,8 @@ GameFlow = require './lib/game_flow.coffee'
 
 window.State = {}
 
+window.Config = require './config/config.coffee'
+
 # =========================================
 
 $ ->

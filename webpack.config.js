@@ -38,7 +38,14 @@ module.exports = {
       {exclude: ['./node_modules']},
 
       // Manipulate gifs (and transform them into webm)
-      { test: /\.gif$/, loader: ['raw-loader', "animation-loader"] }
+      { test: /\.gif$/, loader: ['raw-loader', "animation-loader"] },
+
+      // Load YAML files
+      {
+        test: /\.yaml$/,
+        include: path.resolve('data'),
+        loader: 'yaml'
+      }
 
     ]
   },
