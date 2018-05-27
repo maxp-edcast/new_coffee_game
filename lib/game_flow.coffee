@@ -2,8 +2,8 @@ module.exports = ->
 
 # =========================================
 
-  @begin = ({DOM, ui_effects, State, Config}) =>
-    Object.assign this, {DOM, ui_effects, State, Config}
+  @begin = (deps) =>
+    Object.assign this, deps
 
     @load_localstorage_data()
     @route_url()
@@ -30,7 +30,7 @@ module.exports = ->
     @set_path "choose_level"
 
   @start_game = =>
-    unless ['char_name', 'level_name', 'level_data'].every (key) => @State[key]
+    unless ['char_name', 'level_name'].every (key) => @State[key]
       return @welcome()
     @DOM.$game_container.empty()
     @DOM.$game_container.append @DOM.$grid
@@ -76,5 +76,18 @@ module.exports = ->
     @State.level_data = @Config.levels[name]
     @sync_localstorage()
 
+  @apply_level_data = (level_data) =>
+    @State.map_atlas = level_data.atlas
+    @State.grid_code_matrix = level_data.map.split("\n").map (row) =>
+      @grapheme_splitter.splitGraphemes(row).map (char) =>
+        Object.assign { icon: char }, @State.map_atlas[char]
+
   this
 .apply {}
+
+
+
+
+
+
+

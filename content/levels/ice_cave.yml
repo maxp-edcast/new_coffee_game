@@ -27,9 +27,11 @@ ice_cave:
     ❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎
     ❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎❎
 
+  ground: 🆗
+
   atlas:
     🆗:
-      type: walkable
+      type: ground
     ❎:
       type: wall
     ⭕️:

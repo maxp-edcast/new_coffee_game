@@ -19,6 +19,7 @@ module.exports = (->
 
   @configure_grid = () =>
     @add_game_state()
+    @add_col_hover_listeners()
 
   @configure_char_select = () =>
     # @add_masonry()
@@ -29,6 +30,15 @@ module.exports = (->
     @add_level_opt_listeners()
 
 # =========================================
+
+  @add_col_hover_listeners = =>
+    @DOM.$cols.on "mouseenter", @col_hovered
+
+  @col_hovered = (e) =>
+    $el = $ e.currentTarget
+    [row_idx, col_idx] = ["row-idx", "col-idx"].map (key) => $el.data(key)
+    col_attrs = @State.grid_code_matrix[row_idx][col_idx]
+    # console.log col_attrs
 
   @add_main_menu_handler = ($btn) =>
     $btn.on "click", @main_menu
@@ -56,12 +66,15 @@ module.exports = (->
     @add_current_level_to_grid()
 
   @add_current_level_to_grid = =>
-    level_data = @State.level_data
-    char_matrix = level_data.map.split("\n").map (row) =>
-      @grapheme_splitter.splitGraphemes(row)
-    char_matrix.forEach (chars, row_idx) =>
-      chars.forEach (icon, col_idx) =>
-        @DOM.grid_content_matrix[row_idx][col_idx].text(icon)
+    @GameFlow.apply_level_data(@State.level_data)
+    @State.grid_code_matrix.forEach (row, row_idx) =>
+      row.forEach (col, col_idx) =>
+        @set_icon(row_idx, col_idx, col.icon)
+
+  @set_icon = (row_idx, col_idx, icon) =>
+    $col = @DOM.grid_content_matrix[row_idx][col_idx]
+    $col.empty()
+    $col.append(icon)
 
   @route_button = ($btn, fn) =>
     $btn.on 'click', fn
@@ -69,7 +82,6 @@ module.exports = (->
   @add_char_opt_listeners = () =>
     {$char_opts} = @DOM
     $char_opts.each @add_char_opt_click_listeners
-
 
   @add_level_opt_listeners = () =>
     {$level_opts} = @DOM
