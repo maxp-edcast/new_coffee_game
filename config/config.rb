@@ -18,6 +18,10 @@ class RecursiveOpenStruct
     end
     res
   end
+  def merge!(dict)
+    dict.each { |k, v| self[k] = v }
+    self
+  end
   def each(&blk)
     @table.each do |k, v|
       blk.call k, (v.is_a?(Hash) ? to_struct(v) : v)
@@ -54,7 +58,7 @@ end
 
 Config = RecursiveOpenStruct.new
 
-Config.merge to_struct load_yml "./config/game_config.yml"
+Config.merge! to_struct load_yml "./config/game_config.yml"
 
 Config.characters = to_struct load_yml "./config/char_config.yml"
 

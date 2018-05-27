@@ -21,6 +21,9 @@ module.exports = load: () -> (->
   @$rows.each (_idx, row) =>
     @grid_matrix.push $(row).find(".col")
 
+  @grid_content_matrix = @grid_matrix.map (row) =>
+    row.toArray().map (el) => $(el).find(".content")
+
   @$char_select = $ require "html-loader!../views/char_select.slim"
   @$char_opts = @$char_select.find(".char-opt")
 

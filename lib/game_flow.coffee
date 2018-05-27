@@ -30,7 +30,8 @@ module.exports = ->
     @set_path "choose_level"
 
   @start_game = =>
-    returnn @welcome() unless @State.char_name && @State.level_name
+    unless ['char_name', 'level_name', 'level_data'].every (key) => @State[key]
+      return @welcome()
     @DOM.$game_container.empty()
     @DOM.$game_container.append @DOM.$grid
     @ui_effects.configure_grid()

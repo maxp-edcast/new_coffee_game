@@ -54,7 +54,8 @@ module.exports = (->
     level_data = @State.level_data
     level_data.map.split("\n").forEach (row, row_idx) =>
       row.split("").forEach (icon, col_idx) =>
-        @DOM.grid_matrix[row_idx].eq(col_idx).text(icon)
+        debugger if !@DOM.grid_content_matrix[row_idx][col_idx]
+        @DOM.grid_content_matrix[row_idx][col_idx].text(icon)
 
   @route_button = ($btn, fn) =>
     $btn.on 'click', fn
