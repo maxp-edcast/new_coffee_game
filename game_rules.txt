@@ -1,0 +1,16 @@
+1. Choose character
+
+2. Choose map
+
+3. Character spawns on map along with starting items/skills
+
+4. Shop, trainer, and workshop spawn on map
+  - skills trees, inventories, recipes, etc are separated by level
+
+5. neutral creeps spawn on map
+  - creeps are unique to locations, may have unique behavior,
+    and may have random/unique drops
+  - they do not initiate fights
+  - players may initiate fights with them. Combat is a simple back-and-forth.
+    Player expends action/stamina to fight.
+

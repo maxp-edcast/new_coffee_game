@@ -20,6 +20,12 @@ module.exports = ->
     @ui_effects.configure_char_select()
     @set_path "choose_character"
 
+  @choose_level = =>
+    @DOM.$game_container.empty()
+    @DOM.$game_container.append @DOM.$level_select
+    @ui_effects.configure_level_select()
+    @set_path "choose_level"
+
   @start_game = =>
     @DOM.$game_container.empty()
     @DOM.$game_container.append @DOM.$grid
@@ -32,6 +38,7 @@ module.exports = ->
     routes_table = {
       "#": @welcome,
       "#choose_character": @choose_character,
+      "#choose_level": @choose_level,
       "#game": @start_game
     }
     fn = routes_table[@get_path()]
@@ -47,6 +54,9 @@ module.exports = ->
 
   @set_character = (name) =>
     @State.char_name = name
+
+  @set_level = (name) =>
+    @State.level_name = name
 
   this
 .apply {}

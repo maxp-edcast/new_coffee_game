@@ -1,0 +1,6 @@
+---
+
+grenade:
+  equip: 1h
+  range: 3
+  on throw: next turn, explodes dealing 3 damage

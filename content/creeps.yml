@@ -1,0 +1,24 @@
+
+Blood Goblin:
+  a/d: 1/2
+  range: 1
+  on death: explodes, dealing 3 damage in r2 circle
+  spawner: chemical set
+  spawn cost: grenade, blood ball, deflated goblin skin
+  spawn params: grenade boosts explosion power
+  loot: blood ball, deflated goblin skin
+
+Bone Dragon:
+  a/d: 7/7
+  range: 3
+  spawner: void cauldron
+  
+  spawn cost: 3x bones, dark matter
+  loot: dragons tooth, pearl of hades, 3x bones
+
+Neostar:
+  a/d: 2/4
+  range: 5
+  spawner: incubator
+  spawn cost: deep shell, fertilizer
+  loot: deep shell, long efflicted tentacle

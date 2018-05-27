@@ -14,9 +14,13 @@ module.exports = load: () -> (->
   @$rows = @$grid.find(".row")
   @$cols = @$grid.find(".col")
   @$char_name = @$grid.find(".char-name")
+  @$level_name = @$grid.find(".level-name")
 
   @$char_select = $ require "html-loader!../views/char_select.slim"
   @$char_opts = @$char_select.find(".char-opt")
+
+  @$level_select = $ require "html-loader!../views/level_select.slim"
+  @$level_opts = @$level_select.find(".level-opt")
 
   this
 ).apply {}

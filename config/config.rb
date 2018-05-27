@@ -8,3 +8,5 @@ end
 Config = struct_from_yml "./config/game_config.yml"
 
 Config.characters = struct_from_yml "./config/char_config.yml"
+
+Config.levels = struct_from_yml "./config/level_config.yml"
