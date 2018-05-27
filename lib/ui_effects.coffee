@@ -28,13 +28,17 @@ module.exports = (->
 # =========================================
 
   @add_restart_handler = ($btn) =>
-    $btn.on "click", (e) =>
-      location.hash = ""
-      location.pathname = "/"
-      location.reload()
+    $btn.on "click", @restart
+
+  @restart = =>
+    @GameFlow.welcome()
 
   @add_game_state = =>
-    @DOM.$char_name.text(@State.char_name || "ERROR! name not set")
+    name = @State.char_name
+    if name
+      @DOM.$char_name.text(name)
+    else
+      @restart()
 
   @route_button = ($btn, fn) =>
     $btn.on 'click', fn
