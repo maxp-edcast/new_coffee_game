@@ -41,6 +41,8 @@ module.exports = (->
 # HELPERS
 # =========================================
 
+  @ms_per_move = 150
+
   @add_keyboard_controls = =>
     @DOM.$body.on 'keydown', (e) =>
       e.preventDefault()
@@ -70,7 +72,34 @@ module.exports = (->
     start_key = @State.player_coords.join(",")
     end_key = target_coords.join(",")
     path = @State.pathfinder_graph.path start_key, end_key
-    console.log path
+    if path
+      @move_on_path(path)
+    else
+      @cant_move_to_col(target_coords)
+
+  @move_on_path = (path, ms_per_move) =>
+    ms_per_move ||= @ms_per_move
+    path.shift() # the first item in the path is the origin.
+    @illustrate_path(path)
+    interval = setInterval =>
+      target = path.shift()
+      unless target
+        clearInterval(interval)
+        return
+      [next_row_idx, next_col_idx] = target.split(",").map (idx) =>
+        parseInt idx
+      [player_row_idx, player_col_idx] = @State.player_coords
+      row_diff = next_row_idx - player_row_idx
+      col_diff = next_col_idx - player_col_idx
+      @GridActions.move(
+        @State.player_coords,
+        vector: [row_diff, col_diff]
+      )
+    , ms_per_move
+
+  @cant_move_to_col = (coords) =>
+
+  @illustrate_path = (path) =>
 
   @add_main_menu_handler = ($btn) =>
     $btn.on "click", @main_menu

@@ -43,10 +43,15 @@ module.exports = (->
       [[next_row_idx, next_col_idx], col]
     .filter ([_coords, col]) => col
 
-  @move = ([row_idx, col_idx], direction, conditional_fn) =>
+  @move = (orig_coords, {direction, vector}, conditional_fn) =>
+    [row_idx, col_idx] = orig_coords
     conditional_fn ||= => true
 
-    [row_vector, col_vector] = @vectors[direction]
+    [row_vector, col_vector] = if direction
+      @vectors[direction]
+    else
+      vector
+
     orig_row = @State.grid_code_matrix[row_idx]
     orig_col = orig_row[col_idx]
     next_row_idx = row_idx + row_vector
@@ -54,7 +59,6 @@ module.exports = (->
     next_row = @State.grid_code_matrix[next_row_idx]
     next_col = next_row[next_col_idx]
 
-    orig_coords = [row_idx, col_idx]
     next_coords = [next_row_idx, next_col_idx]
 
     return unless next_col
