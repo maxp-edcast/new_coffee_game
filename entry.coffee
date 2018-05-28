@@ -14,6 +14,8 @@ GameFlow = require './lib/game_flow.coffee'
 GraphemeSplitter = require 'grapheme-splitter'
 grapheme_splitter = new GraphemeSplitter()
 
+util = require './lib/util.coffee'
+
 GridActions = require './lib/grid_actions.coffee'
 window.State = {}
 
@@ -40,9 +42,9 @@ $ ->
 
   deps = {
     DOM, Masonry, GameFlow, State, ui_effects, Config, grapheme_splitter,
-    GridActions
+    GridActions, util
   }
 
   ui_effects.begin(deps)
-  GameFlow.begin(deps)
   GridActions.begin(deps)
+  GameFlow.begin(deps)

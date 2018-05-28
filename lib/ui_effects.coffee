@@ -1,8 +1,7 @@
 module.exports = (->
 
-  @begin = ({DOM, Masonry, GameFlow, State, grapheme_splitter}) =>
-    @deps = {DOM, Masonry, GameFlow, State, grapheme_splitter}
-    Object.assign this, @deps
+  @begin = (deps) =>
+    Object.assign this, deps
 
     @configure_main_menu_listeners()
 
@@ -20,6 +19,8 @@ module.exports = (->
   @configure_grid = () =>
     @add_game_state()
     @add_col_hover_listeners()
+    # @add_col_click_listeners()
+    @add_keyboard_controls()
 
   @configure_char_select = () =>
     # @add_masonry()
@@ -31,6 +32,16 @@ module.exports = (->
 
 # =========================================
 
+  @add_keyboard_controls = =>
+    @DOM.$body.on 'keydown', (e) =>
+      direction = switch e.keyCode
+        when 37 then "left"
+        when 38 then "up"
+        when 39 then "right"
+        when 40 then "down"
+      if direction && @State.player_coords
+        @GridActions.move(@State.player_coords, direction)
+
   @add_col_hover_listeners = =>
     @DOM.$cols.on "mouseenter", @col_hovered
 
@@ -39,6 +50,14 @@ module.exports = (->
     [row_idx, col_idx] = ["row-idx", "col-idx"].map (key) => $el.data(key)
     col_attrs = @State.grid_code_matrix[row_idx][col_idx]
     # console.log col_attrs
+
+  @add_col_click_listeners = =>
+    @DOM.$cols.on "click", @col_clicked
+
+  @col_clicked = (e) =>
+    $el = $ e.currentTarget
+    [row_idx, col_idx] = ["row-idx", "col-idx"].map (key) => $el.data(key)
+    # TODO
 
   @add_main_menu_handler = ($btn) =>
     $btn.on "click", @main_menu
@@ -52,6 +71,9 @@ module.exports = (->
   @wipe_data = =>
     @GameFlow.clear_localstorage()
     @main_menu()
+
+  @show_error = (msg) =>
+    @DOM.$error.text msg
 
   @export_game_state = =>
     @DOM.$body.empty()

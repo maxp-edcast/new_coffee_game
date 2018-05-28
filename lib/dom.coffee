@@ -9,6 +9,8 @@ module.exports = load: () -> (->
   @$wipe_data_btn = $ "#wipe-data"
   @$export_game_state_btn = $ "#export-game-state"
 
+  @$error = $ "#error"
+
   @$welcome = $ require "html-loader!../views/welcome.slim"
   @$start_btn = @$welcome.find("#start")
 

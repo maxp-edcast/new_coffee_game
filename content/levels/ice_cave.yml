@@ -34,11 +34,11 @@ ice_cave:
       type: ground
     ❎:
       type: wall
-    ⭕️:
+    ⭕:
       type: door
       target: goblin_fields
     🛁:
-      type: spawn_point
+      type: player
       dialog: |
         I awakened in some sort of ice cave.
         Where am I? What is this place?
@@ -57,6 +57,8 @@ ice_cave:
       type: item
       name: bomb
       stacks: 3
+    🌫:
+      type: wall
 
 
 

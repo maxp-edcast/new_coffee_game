@@ -14,6 +14,7 @@ module.exports = ->
     @ui_effects.configure_welcome()
     @set_path ""
 
+
   @choose_character = =>
     return @choose_level() if @State.char_name
     @DOM.$game_container.empty()
@@ -38,6 +39,12 @@ module.exports = ->
     @set_path "game"
 
 # =========================================
+
+  @default_ground_col = =>
+    {
+      icon: @State.level_data.ground,
+      type: "ground"
+    }
 
   @load_localstorage_data = =>
     Object.assign @State, JSON.parse localStorage.getItem "game_data"
@@ -77,10 +84,15 @@ module.exports = ->
     @sync_localstorage()
 
   @apply_level_data = (level_data) =>
-    @State.map_atlas = level_data.atlas
-    @State.grid_code_matrix = level_data.map.split("\n").map (row) =>
-      @grapheme_splitter.splitGraphemes(row).map (char) =>
-        Object.assign { icon: char }, @State.map_atlas[char]
+    @State.grid_code_matrix = level_data.map.split("\n").map (row, row_idx) =>
+      @grapheme_splitter.splitGraphemes(row).map (char, col_idx) =>
+        obj = Object.assign { icon: char }, @State.level_data.atlas[char]
+        console.log(obj.type)
+        debugger unless obj.type
+        if obj.type == "player"
+          @State.player_coords = [row_idx, col_idx]
+        obj
+    @sync_localstorage()
 
   this
 .apply {}
