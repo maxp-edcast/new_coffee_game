@@ -70,6 +70,7 @@ module.exports = (->
 
   @wipe_data = =>
     @GameFlow.clear_localstorage()
+    alert("data wiped")
     @main_menu()
 
   @show_error = (msg) =>

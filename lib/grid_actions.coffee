@@ -7,8 +7,7 @@ module.exports = (->
     right: [0, 1]
   }
 
-  @begin = (deps) =>
-    Object.assign this, deps
+  @begin = (deps) =>    Object.assign this, deps
 
   @move = ([row_idx, col_idx], direction) =>
     [row_vector, col_vector] = @vectors[direction]
@@ -30,7 +29,7 @@ module.exports = (->
       original_occupant: Object.assign({}, next_row[next_col_idx])
     }
 
-    debugger
+    @State.player_coords = [next_row_idx, next_col_idx]
 
     @ui_effects.set_icon row_idx, col_idx, orig_row[col_idx].icon
     @ui_effects.set_icon next_row_idx, next_col_idx, moving_obj.icon

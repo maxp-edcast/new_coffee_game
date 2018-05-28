@@ -14,7 +14,6 @@ module.exports = ->
     @ui_effects.configure_welcome()
     @set_path ""
 
-
   @choose_character = =>
     return @choose_level() if @State.char_name
     @DOM.$game_container.empty()
@@ -88,7 +87,6 @@ module.exports = ->
       @grapheme_splitter.splitGraphemes(row).map (char, col_idx) =>
         obj = Object.assign { icon: char }, @State.level_data.atlas[char]
         console.log(obj.type)
-        debugger unless obj.type
         if obj.type == "player"
           @State.player_coords = [row_idx, col_idx]
         obj
