@@ -32,31 +32,42 @@ ice_cave:
   atlas:
     🆗:
       type: ground
+      walkable: true
+
     ❎:
       type: wall
+
     ⭕:
       type: door
       target: goblin_fields
+      walkable: true
+
     🛁:
       type: player
+      agent: true
       dialog: |
         I awakened in some sort of ice cave.
         Where am I? What is this place?
         Memories of the past are but a glimmer ...
         Was it a dream?
+
     🗡:
       type: item
       name: blade_of_the_guantlet
+
     💀:
       type: npc
-      name: frozen_adveturer
+      name: frozen_adventurer
+
     🦇:
       type: creep
       name: frostbat
+
     💣:
       type: item
       name: bomb
       stacks: 3
+
     🌫:
       type: wall
 

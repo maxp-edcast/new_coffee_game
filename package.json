@@ -30,6 +30,7 @@
     "grapheme-splitter": "^1.0.2",
     "jquery": "^3.2.1",
     "masonry-layout": "^4.2.1",
+    "node-dijkstra": "^2.5.0",
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3",
     "slim-lang-loader": "0.0.7",

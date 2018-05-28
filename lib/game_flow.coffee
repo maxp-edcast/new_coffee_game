@@ -1,6 +1,8 @@
 module.exports = ->
 
 # =========================================
+# DISPATCHERS
+# =========================================
 
   @begin = (deps) =>
     Object.assign this, deps
@@ -38,11 +40,14 @@ module.exports = ->
     @set_path "game"
 
 # =========================================
+# HELPERS
+# =========================================
 
   @default_ground_col = =>
     {
       icon: @State.level_data.ground,
       type: "ground"
+      walkable: true
     }
 
   @load_localstorage_data = =>
@@ -86,11 +91,11 @@ module.exports = ->
     @State.grid_code_matrix = level_data.map.split("\n").map (row, row_idx) =>
       @grapheme_splitter.splitGraphemes(row).map (char, col_idx) =>
         obj = Object.assign { icon: char }, @State.level_data.atlas[char]
-        console.log(obj.type)
         if obj.type == "player"
           @State.player_coords = [row_idx, col_idx]
         obj
     @sync_localstorage()
+    @GridActions.seed_pathfinder()
 
   this
 .apply {}

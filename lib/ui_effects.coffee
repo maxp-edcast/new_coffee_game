@@ -1,3 +1,8 @@
+
+# =========================================
+# THIS FILE RELATES TO UI BEHAVIOR IN ANY FORM
+# =========================================
+
 module.exports = (->
 
   @begin = (deps) =>
@@ -5,6 +10,8 @@ module.exports = (->
 
     @configure_main_menu_listeners()
 
+# =========================================
+# DISPATCHERS
 # =========================================
 
   @configure_main_menu_listeners = =>
@@ -19,8 +26,8 @@ module.exports = (->
   @configure_grid = () =>
     @add_game_state()
     @add_col_hover_listeners()
-    # @add_col_click_listeners()
-    @add_keyboard_controls()
+    @add_col_click_listeners()
+    # @add_keyboard_controls()
 
   @configure_char_select = () =>
     # @add_masonry()
@@ -31,9 +38,12 @@ module.exports = (->
     @add_level_opt_listeners()
 
 # =========================================
+# HELPERS
+# =========================================
 
   @add_keyboard_controls = =>
     @DOM.$body.on 'keydown', (e) =>
+      e.preventDefault()
       direction = switch e.keyCode
         when 37 then "left"
         when 38 then "up"
@@ -56,8 +66,11 @@ module.exports = (->
 
   @col_clicked = (e) =>
     $el = $ e.currentTarget
-    [row_idx, col_idx] = ["row-idx", "col-idx"].map (key) => $el.data(key)
-    # TODO
+    target_coords = ["row-idx", "col-idx"].map (key) => $el.data(key)
+    start_key = @State.player_coords.join(",")
+    end_key = target_coords.join(",")
+    path = @State.pathfinder_graph.path start_key, end_key
+    console.log path
 
   @add_main_menu_handler = ($btn) =>
     $btn.on "click", @main_menu
